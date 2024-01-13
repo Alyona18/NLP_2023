@@ -19,7 +19,7 @@ class FaissVectorStorage:
     def initialize(self):
         pass
 
-    def add_vectors(self, embeddings, documents):
+    def add_vectors(self, embeddings,documents):
         self.index.add(embeddings)
 
     def save_index(self, index_path):
@@ -51,6 +51,7 @@ if __name__ == "__main__":
     texts = load_texts_from_gzip(args.data_path)
 
     vector_storage = FaissVectorStorage(dimension=model.get_sentence_embedding_dimension())
+    vector_storage.initialize()
     index_documents(model, texts, vector_storage)
     vector_storage.save_index(args.index_path)
 
